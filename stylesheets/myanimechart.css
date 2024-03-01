@@ -1,0 +1,33 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 98%;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.status.watching g rect {
+    fill: #2db039 !important;
+}
+
+.status.plantowatch g rect {
+    fill: #c3c3c3 !important;
+}
+
+.status.completed g rect {
+    fill: #26448f !important;
+}
+
+.status.onhold g rect {
+    fill: #f1c83e !important;
+}
+
+.status.dropped g rect {
+    fill: #a12f31 !important;
+}

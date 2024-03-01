@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./stylesheets/frappe-gantt.min.css">
+		<link rel="stylesheet" href="./stylesheets/myanimechart.css">
+		<script src="./scripts/frappe-gantt.min.js"></script>
+		<script src="./scripts/myanimechart.js"></script>
+		<title>MyAnimeChart</title>
+	</head>
+	<body>
+		<div id="header" class="header">
+			<h1>MyAnimeChart</h1>
+			<i>Compiles a user's MyAnimeList into a Gantt-like chart.</i><br /><br />
+		</div>
+		<div id="query">
+			<form action="javascript:void(0);" onsubmit="createMyAnimeChart(this)">
+				<label for="upload">Upload a MyAnimeList Export XML:</label>
+				<input type="file" id="upload" accept="text/xml, application/xml" />
+				<input type="submit" value="Create Chart" />
+			</form>
+		</div>
+		<div id="chart">
+			<svg id="gantt"></svg>
+		</div>
+		<div id="footer" class="footer">
+			<a href="https://github.com/massimilianodelliubaldini/my-anime-chart">GitHub</a>
+			<a> | </a>
+			<a href="https://myanimelist.net">MyAnimeList</a>
+			<a> | </a>
+			<a href="https://frappe.io/gantt">Frappe Gantt</a>
+		</div>
+	</body>
+</html>
