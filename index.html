@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-=1.0">
 		<link rel="stylesheet" href="./stylesheets/frappe-gantt.min.css">
 		<link rel="stylesheet" href="./stylesheets/myanimechart.css">
 		<script src="./scripts/frappe-gantt.min.js"></script>
@@ -21,6 +21,14 @@
 			</form>
 		</div>
 		<div id="chart">
+			<div id="time" style="display:none;">
+				<input type="radio" id="radioTimeWeek" value="Week"  name="time" class="radio" />
+				<label for="radioTimeWeek">Week</label>
+				<input type="radio" id="radioTimeMonth" value="Month" name="time" class="radio" />
+				<label for="radioTimeMonth">Month</label>
+				<input type="radio" id="radioTimeYear" value="Year"  name="time" class="radio" />
+				<label for="radioTimeYear">Year</label><br />
+			</div>
 			<svg id="gantt"></svg>
 		</div>
 		<div id="footer" class="footer">

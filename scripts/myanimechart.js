@@ -3,7 +3,10 @@ function getId(anime) {
 }
 
 function getName(anime) {
-	return anime.getElementsByTagName("series_title")[0].innerHTML.trim();
+	return anime.getElementsByTagName("series_title")[0].innerHTML
+		.replaceAll("<![CDATA[", "")
+		.replaceAll("]]>", "")
+		.trim();
 }
 
 function getStart(anime) {
@@ -16,11 +19,19 @@ function getEnd(anime) {
 	return end == "0000-00-00" ? getStart(anime) : end;
 }
 
-function getStatus(anime) {
-	return "bar status " + anime.getElementsByTagName("my_status")[0].innerHTML
-		.toLowerCase()
+function getBarClass(anime) {
+	return anime.getElementsByTagName("my_status")[0].innerHTML
 		.replaceAll(" ", "")
-		.replaceAll("-", "");
+		.replaceAll("-", "")
+		.toLowerCase();
+}
+
+function getStatus(anime) {
+	return anime.getElementsByTagName("my_status")[0].innerHTML;
+}
+
+function getScore(anime) {
+	return anime.getElementsByTagName("my_score")[0].innerHTML;
 }
 
 function createMyAnimeChart(form) {
@@ -41,17 +52,39 @@ function createMyAnimeChart(form) {
 					"name": getName(anime),
 					"start": getStart(anime),
 					"end": getEnd(anime),
-					"custom_class": getStatus(anime)
+					"custom_class": "bar status " + getBarClass(anime),
+					// custom fields below
+					"status": getStatus(anime),
+					"score": getScore(anime)
 				};
 			})
 			.sort((a, b) => {
-				// Gantt charts go top-left to bottom right. This sort accomplishes that.
 				return new Date(a.start) - new Date(b.start); 
 			});
 
 		var gantt = new Gantt("#gantt", chartList, {
 			view_modes: ["Week", "Month", "Year"],
-			view_mode: "Month"
+			view_mode: "Month",
+			custom_popup_html: (anime) => {
+
+				var startDate = new Date(anime.start).toDateString();
+				var finishDate = new Date(anime.end).toDateString();
+				return `
+					<div class="popup">
+						<h5>${anime.name}</h5>
+						<p>${startDate} - ${finishDate}</p>
+						<p>Status: ${anime.status}</p>
+						<p>Score: ${anime.score}</p>
+					</div>
+				`;
+			}
 		});
+
+		document.getElementById("radioTimeWeek").onchange = () => { gantt.change_view_mode("Week"); };
+		document.getElementById("radioTimeMonth").onchange = () => { gantt.change_view_mode("Month"); };
+		document.getElementById("radioTimeYear").onchange = () => { gantt.change_view_mode("Year"); };
+
+		document.getElementById("radioTimeMonth").checked = "checked";
+		document.getElementById("time").style = "display:inline;";
 	});
 }

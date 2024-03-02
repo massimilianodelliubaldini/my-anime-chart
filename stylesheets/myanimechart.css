@@ -31,3 +31,34 @@ body {
 .status.dropped g rect {
     fill: #a12f31 !important;
 }
+
+.popup {
+    background: #ffffff;
+    display: inline-block;
+    padding: 12px;
+    box-shadow: 1px 1px 3px #6f6f6f;
+    width: max-content;
+
+    h5, p {
+        margin: 0;
+    }
+
+    h5 {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.pointer {
+    border: 5px #ffffff;
+}
