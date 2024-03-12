@@ -9,14 +9,22 @@ function getName(anime) {
 		.trim();
 }
 
+// All the date functions ensure a failsafe value of today,
+// and that ends do not come before starts.
+function getToday() {
+	return new Date().toISOString().slice(0, 10);
+}
+
 function getStart(anime) {
 	var start = anime.getElementsByTagName("my_start_date")[0].innerHTML;
-	return start == "0000-00-00" ? new Date().toISOString().slice(0, 10) : start;
+	var end = anime.getElementsByTagName("my_finish_date")[0].innerHTML;
+	return start == "0000-00-00" ? (end == "0000-00-00" ? getToday() : end) : start;
 }
 
 function getEnd(anime) {
+	var start = anime.getElementsByTagName("my_start_date")[0].innerHTML;
 	var end = anime.getElementsByTagName("my_finish_date")[0].innerHTML;
-	return end == "0000-00-00" ? getStart(anime) : end;
+	return end == "0000-00-00" ? (start == "0000-00-00" ? getToday() : start) : end;
 }
 
 function getBarClass(anime) {
